@@ -1,0 +1,17 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: db
+    environment:
+      MYSQL_DATABASE: threadmusync
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pwd
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+
+volumes:
+  mysql_data:
