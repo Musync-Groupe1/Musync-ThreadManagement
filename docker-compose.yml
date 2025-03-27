@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: juba
+      POSTGRES_PASSWORD: juba
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data-musync:/var/lib/postgresql/data
+
+volumes:
+  postgres-data-musync:
