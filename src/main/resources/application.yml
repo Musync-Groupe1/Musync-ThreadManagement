@@ -4,7 +4,6 @@ spring:
     username: juba
     password: juba
     driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
       ddl-auto: create-drop  # ou validate, create, create-drop selon ton besoin
@@ -12,6 +11,18 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: thread-musync-client
+            client-secret: v6Zi4cxOZUTqt3TotzQInmEVpk4rQt00
+            scope: openid,profile,email
+            redirect-uri: http://localhost:9091/login/oauth2/code/keycloak
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/thread-musync
 
 server:
   port: 9091
