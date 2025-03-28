@@ -1,5 +1,6 @@
 package com.univrouen.socialmedia.Controller;
 
+
 import com.univrouen.socialmedia.Dto.User.CreateUserRequestDto;
 import com.univrouen.socialmedia.Entity.User;
 import com.univrouen.socialmedia.Repository.UserRepository;
@@ -13,21 +14,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 public class UserController {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> createUser(@RequestBody CreateUserRequestDto createUserRequestDto,
+    public ResponseEntity<Void> createUser(@RequestBody CreateUserRequestDto userRequestDto,
                                            HttpServletResponse response){
-        System.out.println("createUserRequestDto = " + createUserRequestDto.toString());
+        /*System.out.println("createUserRequestDto = " + userRequestDto.toString());
         User user = new User();
-        user.setFirstName(createUserRequestDto.getFirstname());
-        user.setLastName(createUserRequestDto.getLastname());
-        user.setEmail(createUserRequestDto.getEmail());
+        user.setFirstName(userRequestDto.getFirstname());
+        user.setLastName(userRequestDto.getLastname());
+        user.setEmail(userRequestDto.getEmail());
         userRepository.save(user);
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(user);*/
+        return ResponseEntity.ok().build();
 
     }
 }
