@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.util.List;
 
 @NoArgsConstructor
@@ -14,14 +15,17 @@ import java.util.List;
 @Table(name="Users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private String user_id;
 
-    private String firstName;
+    private String first_name;
 
-    private String lastName;
+    private String last_name;
 
     private String email;
+
+    private Date birthday;
+
+    private String gender;
 
     @OneToMany(
             mappedBy = "user"
