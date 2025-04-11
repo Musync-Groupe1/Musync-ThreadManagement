@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 
-@Profile("dev")
 @Component
 public class DataInitializer implements CommandLineRunner {
 
@@ -20,21 +19,19 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // id test : 567423b7-1e35-4894-8e12-c48f64628b54 username : test password : test nom : Dupont prénom : Jean email : test@test.fr
-       /* User user = new User();
-        user.setUser_id("567423b7-1e35-4894-8e12-c48f64628b54");
-        user.setFirst_name("Jean");
-        user.setLast_name("Dupont");
+        User user = new User();
+        user.setUser_id("914d643b-7bb5-4eed-a1f2-77899680b97e");
+        user.setFirst_name("test");
+        user.setLast_name("test");
         user.setEmail("test@test.fr");
         user.setGender("Male");
         user.setBirthday(new Date(2002, 1, 1));
         userRepository.save(user);
 
-        // id azd : 856b4f12-282f-44bf-9b1f-f28a384aecef, username : azd, password : azd, nom: azd, prénom : azd, email : azd@azd.fr
         user = new User();
-        user.setUser_id("856b4f12-282f-44bf-9b1f-f28a384aecef");
-        user.setFirst_name("azd");
-        user.setLast_name("azd");
+        user.setUser_id("e2dc848c-e6bd-4734-b374-95c72a0617cf");
+        user.setFirst_name("Jean");
+        user.setLast_name("Dupont");
         user.setEmail("azd@azd.fr");
         user.setGender("Male");
         user.setBirthday(new Date(2004, 5, 15));
@@ -43,7 +40,7 @@ public class DataInitializer implements CommandLineRunner {
 
 
 
-        System.out.println("Données d'échantillon insérées !");*/
+        System.out.println("Données d'échantillon insérées !");
     }
 
 }
