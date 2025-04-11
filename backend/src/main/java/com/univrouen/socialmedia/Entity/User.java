@@ -1,5 +1,6 @@
 package com.univrouen.socialmedia.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,8 +28,15 @@ public class User {
 
     private String gender;
 
+    @JsonBackReference
     @OneToMany(
             mappedBy = "user"
     )
     private List<Post> posts;
+
+    @JsonBackReference
+    @OneToMany(
+            mappedBy="user"
+    )
+    private List<Comment> comments;
 }
