@@ -1,14 +1,4 @@
 services:
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "8081:80"
-    depends_on:
-      - postgres
   postgres:
     image: postgres:latest
     container_name: postgres-db
@@ -27,11 +17,8 @@ services:
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
-      KEYCLOAK_USER: user       # Utilisateur administrateur pour la console Keycloak
-      KEYCLOAK_PASSWORD: user   # Mot de passe de l'administrateur
-      KEYCLOAK_DB: H2           # Base de données H2 (pour les tests, à remplacer par une vraie base en production)
     ports:
-      - "8080:8080"               # Expose le port 8090 pour accéder à Keycloak
+      - "9090:8080"               # Expose le port 8090 pour accéder à Keycloak
     command: ["start-dev"]  # Spécifie la commande pour démarrer Keycloak en mode production
     volumes:
       - keycloak_data:/opt/keycloak/data  # Volume pour persistance des données
