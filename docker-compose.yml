@@ -1,17 +1,29 @@
 services:
-  db:
-    image: mysql:8.0
-    container_name: db
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
     environment:
-      MYSQL_DATABASE: threadmusync
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: user
-      MYSQL_PASSWORD: pwd
+      POSTGRES_DB: db
+      POSTGRES_USER: juba
+      POSTGRES_PASSWORD: juba
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres-data-musync:/var/lib/postgresql/data
+  
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest 
+    container_name: keycloak
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "9090:8080"               # Expose le port 8090 pour accéder à Keycloak
+    command: ["start-dev"]  # Spécifie la commande pour démarrer Keycloak en mode production
+    volumes:
+      - keycloak_data:/opt/keycloak/data  # Volume pour persistance des données
 
 
 volumes:
-  mysql_data:
+  postgres-data-musync:
+  keycloak_data:
