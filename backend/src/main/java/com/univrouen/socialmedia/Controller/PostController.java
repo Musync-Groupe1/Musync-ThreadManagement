@@ -1,7 +1,6 @@
 package com.univrouen.socialmedia.Controller;
 
 import com.univrouen.socialmedia.Dto.AlertAndInfoDto;
-import com.univrouen.socialmedia.Dto.Poll.PollDto;
 import com.univrouen.socialmedia.Dto.Post.*;
 import com.univrouen.socialmedia.Entity.*;
 import com.univrouen.socialmedia.Repository.*;
@@ -23,21 +22,33 @@ public class PostController {
     private UserRepository userRepository;
     private CommentRepository commentRepository;
     private PostService postService;
+    private QuizRepository quizRepository;
+    private QuizQuestionRepository quizQuestionRepository;
+    private QuizQuestionOptionRepository quizQuestionOptionRepository;
 
     public PostController(PostRepository postRepository,
                           UserRepository userRepository,
                           CommentRepository commentRepository,
-                          PostService postService, PollRepository pollRepository, PollOptionRepository pollOptionRepository) {
+                          PostService postService,
+                          PollRepository pollRepository,
+                          PollOptionRepository pollOptionRepository,
+                          QuizRepository quizRepository,
+                          QuizQuestionRepository quizQuestionRepository,
+                          QuizQuestionOptionRepository quizQuestionOptionRepository) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
         this.commentRepository = commentRepository;
         this.postService = postService;
         this.pollRepository = pollRepository;
         this.pollOptionRepository = pollOptionRepository;
+        this.quizRepository = quizRepository;
+        this.quizQuestionRepository = quizQuestionRepository;
+        this.quizQuestionOptionRepository = quizQuestionOptionRepository;
     }
 
     @PostMapping("/create")
     public CreatePostResponseDto createPost(@Valid @RequestBody CreatePostRequestDto requestDto){
+        System.out.println(requestDto);
         CreatePostResponseDto responseDto = postService.createPost(requestDto);
         return responseDto;
     }
@@ -60,10 +71,47 @@ public class PostController {
                 responseDto.setAlert("Le poste n'existe pas!");
                 return responseDto;
             }
-
-
         }else{
             responseDto.setAlert("L'utilisateur n'existe pas!");
+            return responseDto;
+        }
+    }
+
+    @PostMapping("/votequiz")
+    public AlertAndInfoDto voteQuiz(@Valid @RequestBody VoteQuizRequestDto requestDto){
+        AlertAndInfoDto responseDto = new AlertAndInfoDto();
+        Optional<Post> is_post = postRepository.findById(requestDto.getPost_id());
+        if(is_post.isPresent()){
+            Post post = is_post.get();
+            Quiz quiz = post.getQuiz();
+            if(quiz != null){
+                for(QuizQuestion quizQuestion : quiz.getQuestions()){
+                    if(quizQuestion.getId() == requestDto.getQuestion_id()){
+                        for(QuizQuestionOption quizQuestionOption : quizQuestion.getQuizQuestionOptions()){
+                            if(quizQuestionOption.getId() == requestDto.getOption_id()){
+                                if(quizQuestionOption.getIs_correct()){
+                                    quizQuestionOption.setCount(quizQuestionOption.getCount() + 1);
+                                    responseDto.setInfo("Vous avez choisi la bonne réponse, bravo !");
+                                    return responseDto;
+                                }else{
+                                    quizQuestionOption.setCount(quizQuestionOption.getCount() + 1);
+                                    responseDto.setInfo("Mauvaise réponse !");
+                                    return responseDto;
+                                }
+                            }
+                        }
+                        responseDto.setAlert("Réponse non trouvé dans le poste!");
+                        return responseDto;
+                    }
+                }
+                responseDto.setAlert("La question n'existe pas dans le poste!");
+                return responseDto;
+            }else{
+                responseDto.setAlert("Il n'y a pas de quiz dans ce poste!");
+                return responseDto;
+            }
+        }else{
+            responseDto.setAlert("Le poste n'existe pas!");
             return responseDto;
         }
     }
