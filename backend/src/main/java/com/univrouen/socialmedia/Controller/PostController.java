@@ -91,10 +91,12 @@ public class PostController {
                             if(quizQuestionOption.getId() == requestDto.getOption_id()){
                                 if(quizQuestionOption.getIs_correct()){
                                     quizQuestionOption.setCount(quizQuestionOption.getCount() + 1);
+                                    quizQuestionOptionRepository.save(quizQuestionOption);
                                     responseDto.setInfo("Vous avez choisi la bonne réponse, bravo !");
                                     return responseDto;
                                 }else{
                                     quizQuestionOption.setCount(quizQuestionOption.getCount() + 1);
+                                    quizQuestionOptionRepository.save(quizQuestionOption);
                                     responseDto.setInfo("Mauvaise réponse !");
                                     return responseDto;
                                 }
@@ -123,7 +125,7 @@ public class PostController {
         if(post.isPresent()){
             Poll poll = post.get().getPoll();
             for(PollOption pollOption : poll.getPollOptions()){
-                if(pollOption.getId() == requestDto.getPost_id()){
+                if(pollOption.getId() == requestDto.getPoll_option_id()){
                     pollOption.setCount(pollOption.getCount() + 1);
                     pollOptionRepository.save(pollOption);
                     responseDto.setInfo("Le vote a bien été pris en compte !");
