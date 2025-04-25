@@ -43,6 +43,14 @@ public class Post {
     )
     private Poll poll;
 
+    @JsonManagedReference
+    @OneToOne
+    @JoinColumn(
+            name="quiz_id"
+    )
+    private Quiz quiz;
+
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)

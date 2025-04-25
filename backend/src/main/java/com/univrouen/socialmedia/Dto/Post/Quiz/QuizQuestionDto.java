@@ -1,8 +1,6 @@
-package com.univrouen.socialmedia.Dto.Poll;
+package com.univrouen.socialmedia.Dto.Post.Quiz;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,12 +11,13 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PollDto {
+public class QuizQuestionDto {
     @NotEmpty
     @Size(max = 50)
     private String question;
 
     @NotEmpty
-    private List<PollOptionDto> poll_options;
+    @Size(max = 4)
+    List<QuizOptionDto> quiz_options;
 
 }
