@@ -15,7 +15,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/posts")
 public class PostController {
-
     private final PollRepository pollRepository;
     private final PollOptionRepository pollOptionRepository;
     private PostRepository postRepository;
@@ -25,6 +24,7 @@ public class PostController {
     private QuizRepository quizRepository;
     private QuizQuestionRepository quizQuestionRepository;
     private QuizQuestionOptionRepository quizQuestionOptionRepository;
+
 
     public PostController(PostRepository postRepository,
                           UserRepository userRepository,
