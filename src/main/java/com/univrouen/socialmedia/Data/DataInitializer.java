@@ -20,21 +20,21 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User user = new User();
-        user.setUser_id("d0ebb898-6f43-4080-aebe-0016f4400c24");
-        user.setFirst_name("test");
-        user.setLast_name("test");
+        user.setUserId("d0ebb898-6f43-4080-aebe-0016f4400c24");
+        user.setFirstName("test");
+        user.setLastName("test");
         user.setEmail("test@test.fr");
         user.setGender("Male");
-        user.setBirthday(new Date(2002, 1, 1));
+        user.setBirthday(new Date(2002, 1, 1).toLocalDate());
         userRepository.save(user);
 
         user = new User();
-        user.setUser_id("e2dc848c-e6bd-4734-b374-95c72a0617cf");
-        user.setFirst_name("Jean");
-        user.setLast_name("Dupont");
+        user.setUserId("e2dc848c-e6bd-4734-b374-95c72a0617cf");
+        user.setFirstName("Jean");
+        user.setLastName("Dupont");
         user.setEmail("azd@azd.fr");
         user.setGender("Male");
-        user.setBirthday(new Date(2004, 5, 15));
+        user.setBirthday(new Date(2004, 5, 15).toLocalDate());
         userRepository.save(user);
 
 

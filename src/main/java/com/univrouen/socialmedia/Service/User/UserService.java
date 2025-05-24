@@ -1,7 +1,8 @@
-package com.univrouen.socialmedia.Service;
+package com.univrouen.socialmedia.Service.User;
 
 import com.univrouen.socialmedia.Entity.User;
 
+import java.util.List;
 import java.util.Map;
 
 public interface UserService {
