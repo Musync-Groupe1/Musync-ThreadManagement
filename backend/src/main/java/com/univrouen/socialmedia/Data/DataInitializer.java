@@ -20,7 +20,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User user = new User();
-        user.setUser_id("914d643b-7bb5-4eed-a1f2-77899680b97e");
+        user.setUser_id("d0ebb898-6f43-4080-aebe-0016f4400c24");
         user.setFirst_name("test");
         user.setLast_name("test");
         user.setEmail("test@test.fr");
