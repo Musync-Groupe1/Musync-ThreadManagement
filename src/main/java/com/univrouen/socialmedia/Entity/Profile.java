@@ -19,14 +19,17 @@ import java.util.List;
 @Table(name="Profiles")
 public class Profile {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer profileId;
 
+    // Ajoutez ce champ pour stocker l'ID de l'utilisateur
+    @Column(name = "user_id", unique = true)
+    private String userId;
+
     @JsonManagedReference
-    @OneToOne(
-            mappedBy = "profile"
-    )
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "userId", insertable = false, updatable = false)
     private User user;
+
 
     @JsonManagedReference
     @OneToOne

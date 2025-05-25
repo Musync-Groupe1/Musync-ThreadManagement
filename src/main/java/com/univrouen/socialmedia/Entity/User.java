@@ -33,10 +33,7 @@ public class User {
 
 
     @JsonBackReference
-    @OneToOne()
-    @JoinColumn(
-            name = "user_id"
-    )
+    @OneToOne(mappedBy = "user")
     private Profile profile;
 
     @JsonBackReference

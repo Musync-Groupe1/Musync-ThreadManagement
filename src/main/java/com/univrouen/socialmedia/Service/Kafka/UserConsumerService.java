@@ -28,9 +28,12 @@ public class UserConsumerService {
         try {
             log.info("Received user profile message: {}", message);
             UserProfileMessage userProfileMessage = JsonUtils.fromJson(message, UserProfileMessage.class);
-            User user = userProfileMapper.toUser(userProfileMessage);
-            this.userService.saveUser(user);
-            log.info("User saved with ID: {}", user.getUserId());
+            System.out.println("UserProfileMessage: " + userProfileMessage.toString());
+
+            // Utiliser la nouvelle méthode
+            this.userService.saveUserFromKafka(userProfileMessage);
+
+            log.info("User saved with ID: {}", userProfileMessage.getUser().getUserId());
         } catch (Exception e) {
             log.error("Error processing user profile message: {}", e.getMessage(), e);
         }

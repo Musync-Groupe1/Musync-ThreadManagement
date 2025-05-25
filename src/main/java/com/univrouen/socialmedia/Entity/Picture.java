@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @Table(name="Pictures")
 public class Picture {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pictureId;
 
     private String link;

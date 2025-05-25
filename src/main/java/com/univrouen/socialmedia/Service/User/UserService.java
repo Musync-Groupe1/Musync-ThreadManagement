@@ -1,5 +1,6 @@
 package com.univrouen.socialmedia.Service.User;
 
+import com.univrouen.socialmedia.Dto.kafka.user.UserProfileMessage;
 import com.univrouen.socialmedia.Entity.User;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface UserService {
     void deleteUserById(String id);
 
     User saveUser(User user);
+
+    void saveUserFromKafka(UserProfileMessage userProfileMessage);
 }

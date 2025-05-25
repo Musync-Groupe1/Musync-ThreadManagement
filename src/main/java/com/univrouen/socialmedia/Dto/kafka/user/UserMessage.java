@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @ToString
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class UserMessage {
-    private Integer userId;
+    private String userId;
 
     private String firstName;
 
