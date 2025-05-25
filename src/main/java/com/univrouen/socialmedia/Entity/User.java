@@ -3,12 +3,15 @@ package com.univrouen.socialmedia.Entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -16,17 +19,22 @@ import java.util.List;
 @Table(name="Users")
 public class User {
     @Id
-    private String user_id;
+    private String userId;
 
-    private String first_name;
+    private String firstName;
 
-    private String last_name;
+    private String lastName;
 
     private String email;
 
-    private Date birthday;
+    private LocalDate birthday;
 
     private String gender;
+
+
+    @JsonBackReference
+    @OneToOne(mappedBy = "user")
+    private Profile profile;
 
     @JsonBackReference
     @OneToMany(

@@ -148,4 +148,13 @@ public class PostController {
         responseDto.setInfo("La récupération s'est bien effectuée !");
         return responseDto;
     }
+
+    @GetMapping("/users")
+    public FetchUsersResponseDto getAllUsers() {
+        List<User> users = userRepository.findAll();
+        FetchUsersResponseDto responseDto = new FetchUsersResponseDto();
+        responseDto.setUsers(users);
+        responseDto.setInfo("La récupération des utilisateurs s'est bien effectuée !");
+        return responseDto;
+    }
 }
